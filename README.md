@@ -1,9 +1,5 @@
 # Projet Graphes de Markov - Partie 2
 
-![Scala](https://img.shields.io/badge/Scala-2.13.12-DC322F?style=flat&logo=scala&logoColor=white)
-![SBT](https://img.shields.io/badge/SBT-1.9.7-blue?style=flat)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=flat)
-
 ## Description
 
 Projet universitaire d'étude de graphes de Markov en temps discret, avec application aux prévisions météorologiques. Ce projet implémente l'algorithme de Tarjan pour le calcul de composantes fortement connexes et le calcul de distributions stationnaires.
@@ -22,8 +18,8 @@ graphII/
 │       │   └── Main.scala          # Point d'entrée et validation
 │       └── resources/
 │           └── exemple_meteo.txt   # Données météo (5 états)
-├── exemple_meteo.txt            # Données (copie à la racine)
 ├── RAPPORT_FINAL.pdf            # Rapport académique
+├── RAPPORT_FINAL.md             # Meme Rapport que le pdf
 ├── inventaire_notions.md        # Inventaire des notions FP
 └── README.md                    # Ce fichier
 ```
@@ -86,19 +82,6 @@ sbt run
 sbt "run"
 ```
 
-### Méthode 2 : Depuis l'IDE
-
-**IntelliJ IDEA** :
-1. Ouvrir le projet (File → Open → sélectionner le dossier `graphII`)
-2. Attendre l'import SBT
-3. Clic droit sur `Main.scala` → Run 'Main'
-
-**VS Code (avec Metals)** :
-1. Ouvrir le dossier
-2. Metals détectera automatiquement le projet SBT
-3. Utiliser la commande "Run" dans le fichier `Main.scala`
-
-### Méthode 3 : Script Scala (legacy)
 
 Pour compatibilité, le fichier `projet.sc` est conservé :
 
