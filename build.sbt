@@ -8,7 +8,7 @@ scalaVersion := "2.13.12"
 Compile / doc / scalacOptions ++= Seq(
   "-doc-title", "Projet Graphes de Markov - Partie 2",
   "-doc-version", "2.0",
-  "-doc-footer", "Master 1 Informatique - 2025/2026"
+  "-doc-footer", "Mehedi Touré - Ing 2 Informatique - 2025/2026"
 )
 
 // Options de compilation

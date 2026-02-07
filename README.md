@@ -159,7 +159,8 @@ Voir `inventaire_notions.md` pour l'inventaire complet.
 
 ## Auteur
 
-Master 1 Informatique - EFREI  
+Mehedi Touré
+Ing 2 Informatique - EFREI  
 Année universitaire 2025-2026
 
 ## Références
