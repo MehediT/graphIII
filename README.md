@@ -1,1 +1,184 @@
-# graphIII
+# Projet Graphes de Markov - Partie 2
+
+![Scala](https://img.shields.io/badge/Scala-2.13.12-DC322F?style=flat&logo=scala&logoColor=white)
+![SBT](https://img.shields.io/badge/SBT-1.9.7-blue?style=flat)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=flat)
+
+## Description
+
+Projet universitaire d'étude de graphes de Markov en temps discret, avec application aux prévisions météorologiques. Ce projet implémente l'algorithme de Tarjan pour le calcul de composantes fortement connexes et le calcul de distributions stationnaires.
+
+## Structure du projet
+
+```
+graphII/
+├── build.sbt                    # Configuration SBT
+├── project/
+│   └── build.properties         # Version SBT
+├── src/
+│   └── main/
+│       ├── scala/
+│       │   ├── MarkovGraph.scala   # Fonctions principales
+│       │   └── Main.scala          # Point d'entrée et validation
+│       └── resources/
+│           └── exemple_meteo.txt   # Données météo (5 états)
+├── exemple_meteo.txt            # Données (copie à la racine)
+├── RAPPORT_FINAL.pdf            # Rapport académique
+├── inventaire_notions.md        # Inventaire des notions FP
+└── README.md                    # Ce fichier
+```
+
+## Fonctionnalités
+
+### 1. Calculs matriciels
+
+- `adjacencyListToMatrix` : Conversion liste d'adjacence → matrice
+- `multiplyMatrices` : Multiplication de matrices (O(n³))
+- `diffMatrices` : Norme L1 entre deux matrices
+- `matrixPower` : Calcul de M^k (programmation fonctionnelle avec `foldLeft`)
+
+### 2. Algorithme de Tarjan
+
+- `tarjanFromGraph` : Calcul des composantes fortement connexes (CFC)
+- Complexité optimale : O(n + m)
+- Implémentation fidèle au pseudo-code académique
+
+### 3. Analyse des classes
+
+- `extractSubmatrix` : Extraction de sous-matrice pour une classe
+- `isPersistentClass` : Détection des classes persistantes/transitoires
+- `stationaryDistributionOfClass` : Calcul de la distribution stationnaire
+
+## Prérequis
+
+- **Scala** 2.13.x
+- **SBT** 1.9.x (ou supérieur)
+- **JVM** 11 ou supérieur
+
+### Installation
+
+**macOS/Linux** :
+
+```bash
+# Installer SBT via SDKMAN
+sdk install sbt
+
+# Ou via Homebrew (macOS)
+brew install sbt
+```
+
+**Windows** :
+
+Télécharger depuis [https://www.scala-sbt.org/download.html](https://www.scala-sbt.org/download.html)
+
+## Compilation et exécution
+
+### Méthode 1 : Avec SBT (recommandé)
+
+```bash
+# Compilation
+sbt compile
+
+# Exécution
+sbt run
+
+# Compilation + exécution
+sbt "run"
+```
+
+### Méthode 2 : Depuis l'IDE
+
+**IntelliJ IDEA** :
+1. Ouvrir le projet (File → Open → sélectionner le dossier `graphII`)
+2. Attendre l'import SBT
+3. Clic droit sur `Main.scala` → Run 'Main'
+
+**VS Code (avec Metals)** :
+1. Ouvrir le dossier
+2. Metals détectera automatiquement le projet SBT
+3. Utiliser la commande "Run" dans le fichier `Main.scala`
+
+### Méthode 3 : Script Scala (legacy)
+
+Pour compatibilité, le fichier `projet.sc` est conservé :
+
+```bash
+cd graphII
+scala projet.sc
+```
+
+## Génération de la documentation
+
+```bash
+# Générer la Scaladoc
+sbt doc
+
+# La documentation sera dans target/scala-2.13/api/
+```
+
+Ouvrir `target/scala-2.13/api/index.html` dans un navigateur.
+
+## Résultats attendus
+
+L'exécution du programme affiche :
+
+1. **Matrice M** (5×5) : matrice de transition météo
+2. **M³** : distribution après 3 jours
+3. **M⁷** : convergence vers la distribution stationnaire
+4. **Convergence** : n tel que diff(Mⁿ, Mⁿ⁻¹) < 0.01
+5. **Composantes fortement connexes** : partition du graphe
+6. **Distributions stationnaires** : pour chaque classe (persistante ou transitoire)
+
+### Exemple de sortie
+
+```
+=== Matrice M (exemple météo) ===
+M =
+  0.34   0.27   0.00   0.18   0.21
+  0.20   0.40   0.20   0.00   0.20
+  ...
+
+=== Convergence (epsilon = 0.01) ===
+Pour n = 9, diff(M^9, M^8) < 0.01
+Distribution stationnaire (première ligne de M^n) :
+0.16 0.36 0.13 0.05 0.30
+
+=== Composantes fortement connexes ===
+  C1: {1, 2, 3, 4, 5}
+
+=== Distributions stationnaires par classe ===
+  Classe 1 (persistante): [0.1641, 0.3591, 0.1320, 0.0518, 0.2930]
+```
+
+## Format du fichier de données
+
+Le fichier `exemple_meteo.txt` suit le format :
+
+```
+5              ← Nombre de sommets
+0 1 0.34       ← Arête : from to probability
+0 3 0.18
+1 0 0.20
+...
+```
+
+## Notions de programmation fonctionnelle utilisées
+
+- **Immutabilité** : Utilisation de `val` (variables immuables), `List`, `Map`
+- **Fonctions d'ordre supérieur** : `map`, `flatMap`, `filter`, `foldLeft`, `forall`
+- **Pattern matching** : Déstructuration dans les `case`
+- **Récursion** : `matrixPower` avec `foldLeft`, `stationaryDistribution` avec récursion terminale
+- **Collections immuables** : `List`, `Map` (sauf pour Tarjan qui nécessite mutabilité pour performance)
+
+Voir `inventaire_notions.md` pour l'inventaire complet.
+
+## Auteur
+
+Master 1 Informatique - EFREI  
+Année universitaire 2025-2026
+
+## Références
+
+- **Sujet** : `Projet Markov_Partie_2.pdf`
+- **Pseudo-code Tarjan** : `Tarjan parcours pseudo-code.pdf`
+- **Rapport** : `RAPPORT_FINAL.pdf`
