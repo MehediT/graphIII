@@ -115,9 +115,9 @@ object MarkovGraph {
       if (parts.length >= 3) Some((parts(0).toInt, parts(1).toInt, parts(2).toDouble))
       else None
     }
-    val adj = edges.groupBy(_._1).view.mapValues { list =>
-      list.map { case (_, to, p) => (to, p) }
-    }.toMap
+    val adj = edges.groupBy(_._1).map { case (from, list) =>
+      from -> list.map { case (_, to, p) => (to, p) }
+    }
     (adj, n)
   }
 
