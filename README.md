@@ -1,5 +1,7 @@
 # Projet Graphes de Markov - Partie 2
 
+Mon projet est aussi disponible sur Github via "https://github.com/MehediT/graphIII"
+
 ## Description
 
 Projet universitaire d'étude de graphes de Markov en temps discret, avec application aux prévisions météorologiques. Ce projet implémente l'algorithme de Tarjan pour le calcul de composantes fortement connexes et le calcul de distributions stationnaires.
@@ -94,9 +96,9 @@ scala projet.sc
 
 ```bash
 # Générer la Scaladoc
-sbt doc
+scaladoc -d scaladoc src/main/scala/MarkovGraph.scala src/main/scala/Main.scala
 
-# La documentation sera dans target/scala-2.13/api/
+# La documentation est visible en ouvrant le index.hmlt qui est dans scaladoc/
 ```
 
 Ouvrir `target/scala-2.13/api/index.html` dans un navigateur.
